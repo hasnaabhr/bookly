@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        google() // تأكد من وجود هذا المستودع
+        mavenCentral() // تأكد من وجود هذا المستودع
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.2'
+        classpath 'com.google.gms:google-services:4.3.15' // أو يمكنك تجربة إصدار آخر مثل 4.3.10
+    }
+}
+
+allprojects {
+    repositories {
+        google() // تأكد من وجود هذا المستودع
+        mavenCentral() // تأكد من وجود هذا المستودع
+    }
+}
+
+
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
